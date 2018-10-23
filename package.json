@@ -1,0 +1,65 @@
+{
+  "author": "SuhushinAS",
+  "dependencies": {
+    "normalize.css": "^8.0.0",
+    "roboto-fontface": "^0.10.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-flow-strip-types": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.1.2",
+    "autoprefixer": "^9.1.5",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-harddisk-plugin": "^0.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.4",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss": "^7.0.5",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-gradient-transparency-fix": "^3.0.0",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
+  },
+  "description": "Настройка окружения для React",
+  "keywords": [
+    "react",
+    "starterkit"
+  ],
+  "license": "UNLICENSED",
+  "name": "react-starter-kit",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:SuhushinAS/html-layout-kit.git"
+  },
+  "scripts": {
+    "start": "webpack-dev-server -d --config webpack.config.es",
+    "dev": "webpack -d --watch --config webpack.config.es",
+    "build": "cross-env NODE_ENV=production webpack -p --progress --config webpack.config.es"
+  },
+  "version": "0.0.1"
+}
