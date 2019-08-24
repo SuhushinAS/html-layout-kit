@@ -35,7 +35,7 @@ npm run build
 
 Точки входа для разработки - `src/app`
 
-* `index.es` - скрпты;
+* `index.js` - скрпты;
 * `index.html` - разметка;
 * `style.less` - стили.
 

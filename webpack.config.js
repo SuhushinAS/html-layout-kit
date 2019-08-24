@@ -2,98 +2,101 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const nodeEnv = process.env.NODE_ENV || 'development';
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const isProd = 'production' === nodeEnv;
 const path = require('path');
+const webpack = require('webpack');
+
+const nodeEnv = process.env.NODE_ENV || 'development';
+const isProd = 'production' === nodeEnv;
 const pathList = {
-    dist: path.resolve(__dirname, 'www/build'),
-    public: path.resolve(__dirname, 'www'),
-    src: path.resolve(__dirname, 'src'),
+    dist: path.join(__dirname, 'www/build'),
+    public: path.join(__dirname, 'www'),
+    src: path.join(__dirname, 'src'),
 };
 const stats = {
     colors: true,
     errorDetails: true,
     reasons: isProd,
 };
-const webpack = require('webpack');
 
-module.exports = {
-    bail: isProd,
-    context: pathList.src,
-    devServer: isProd ? {} : {
-        contentBase: pathList.public,
-        historyApiFallback: true,
-        host: '0.0.0.0',
-        hot: true,
-        port: 8000,
-        stats,
-    },
-    devtool: isProd ? false : 'eval',
-    entry: {
-        index: 'index',
-    },
-    module: {
-        rules: getRuleList(),
-    },
-    node: {
-        child_process: 'empty',
-        dgram: 'empty',
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-    },
-    optimization: {
-        minimizer: [
-            new UglifyJsPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true,
-                uglifyOptions: {
-                    compress: {
-                        comparisons: true,
-                        conditionals: true,
-                        dead_code: true,
-                        evaluate: true,
-                        if_return: true,
-                        join_vars: true,
-                        sequences: true,
-                        unused: true,
-                        warnings: false,
-                    },
-                    output: {
-                        ascii_only: true,
-                        comments: false,
-                    },
-                    sourceMap: false,
-                },
-            }),
-            new OptimizeCSSAssetsPlugin(),
-        ],
-        splitChunks: {
-            automaticNameDelimiter: '-',
+module.exports = function(env, argv) {
+
+    return {
+        bail: isProd,
+        context: pathList.src,
+        devServer: isProd ? {} : {
+            contentBase: pathList.public,
+            historyApiFallback: true,
+            host: '0.0.0.0',
+            hot: true,
+            port: 8000,
+            stats,
         },
-    },
-    output: {
-        filename: '[name].min.js',
-        library: ['mag', 'MAGDelivery', '[name]'],
-        path: pathList.dist,
-        publicPath: '/build/',
-    },
-    plugins: getPluginList(),
-    resolve: {
-        extensions: ['.es', '.js', '.jsx'],
-        modules: [
-            './',
-            './src/',
-            'node_modules',
-            pathList.src,
-            path.resolve(__dirname, './node_modules'),
-        ],
-    },
-    stats,
-    watchOptions: {aggregateTimeout: 100},
+        devtool: isProd ? false : 'eval',
+        entry: {
+            index: 'index',
+        },
+        module: {
+            rules: getRuleList(),
+        },
+        node: {
+            child_process: 'empty',
+            dgram: 'empty',
+            fs: 'empty',
+            net: 'empty',
+            tls: 'empty',
+        },
+        optimization: {
+            minimizer: [
+                new UglifyJsPlugin({
+                    cache: true,
+                    parallel: true,
+                    sourceMap: true,
+                    uglifyOptions: {
+                        compress: {
+                            comparisons: true,
+                            conditionals: true,
+                            dead_code: true,
+                            evaluate: true,
+                            if_return: true,
+                            join_vars: true,
+                            sequences: true,
+                            unused: true,
+                        },
+                        output: {
+                            ascii_only: true,
+                            comments: false,
+                        },
+                        sourceMap: false,
+                    },
+                }),
+                new OptimizeCSSAssetsPlugin(),
+            ],
+            splitChunks: {
+                automaticNameDelimiter: '-',
+            },
+        },
+        output: {
+            filename: '[name].min.js',
+            library: ['htmlLayoutKit'],
+            path: pathList.dist,
+            publicPath: '/build/',
+        },
+        plugins: getPluginList(),
+        resolve: {
+            extensions: ['.js', '.jsx'],
+            modules: [
+                './',
+                './src/',
+                'node_modules',
+                pathList.src,
+                path.join(__dirname, './node_modules'),
+            ],
+        },
+        stats,
+        watchOptions: {aggregateTimeout: 100},
+    };
 };
 
 /**
@@ -122,7 +125,7 @@ function getRuleListBase() {
         },
         {
             exclude: /node_modules/,
-            test: /\.(es|js|jsx)$/,
+            test: /\.(js|jsx)$/,
             use: {
                 loader: 'babel-loader',
                 options: {cacheDirectory: true},
@@ -214,10 +217,10 @@ function getPluginListBase() {
         }),
         new HtmlWebpackPlugin({
             alwaysWriteToDisk: true,
-            filename: path.resolve(pathList.public, './index.html'),
+            filename: path.join(pathList.public, './index.html'),
             hash: true,
             inject: true,
-            template: path.resolve(pathList.src, './index.htm'),
+            template: path.join(pathList.src, './index.htm'),
         }),
         new HtmlWebpackHarddiskPlugin(),
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
