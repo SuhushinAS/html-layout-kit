@@ -14,13 +14,3 @@ export default () => compile(layout)({
     footer: footer(),
     header: header(),
 });
-
-// export default function() {
-//     return layout({
-//         body: template(html)({
-//             example: example(),
-//         }),
-//         footer: footer(),
-//         header: header(),
-//     });
-// }
