@@ -1,4 +1,6 @@
-import {template} from 'helpers';
-import html from './index.html';
+// @flow
 
-export default template(html);
+import html from './index.html';
+import {compile} from 'handlebars';
+
+export default compile(html);

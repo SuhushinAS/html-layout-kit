@@ -1,6 +1,6 @@
 // @flow
 
-import {template} from 'helpers';
 import html from './index.html';
+import {compile} from 'handlebars';
 
-export default template(html);
+export default compile(html);

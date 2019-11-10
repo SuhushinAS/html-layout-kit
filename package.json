@@ -1,6 +1,7 @@
 {
     "author": "SuhushinAS",
     "dependencies": {
+        "handlebars": "^4.5.1",
         "normalize.css": "^8.0.1"
     },
     "devDependencies": {
