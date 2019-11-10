@@ -135,16 +135,13 @@ module.exports = function() {
             publicPath: '/',
         },
         plugins: [
-            ...getPlugins(),
+            ...getPrePlugins(),
             new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(nodeEnv)}}),
             new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
             ...pages.map(getHTML),
-            new HtmlBeautifyPlugin({config: {html: {wrap_line_length: 150}}}),
             new SpriteLoaderPlugin({plainSprite: true}),
             new CopyPlugin([{from: paths.public, to: paths.dist}]),
-            new OfflinePlugin({
-                externals: ['/api/v1/config'],
-            }),
+            ...getPostPlugins(),
         ],
         resolve: {
             extensions: ['.js', '.jsx'],
@@ -185,7 +182,7 @@ function getCritical(page) {
     });
 }
 
-function getPlugins() {
+function getPrePlugins() {
     if (isProd) {
         return [
             new CleanWebpackPlugin({
@@ -222,4 +219,23 @@ function getPlugins() {
     }
 
     return [new webpack.HotModuleReplacementPlugin()];
+}
+
+function getPostPlugins() {
+    if (isProd) {
+        return [
+            new HtmlBeautifyPlugin({
+                config: {
+                    html: {
+                        wrap_line_length: 150,
+                    },
+                },
+            }),
+            new OfflinePlugin({
+                externals: ['/api/v1/config'],
+            }),
+        ];
+    }
+
+    return [];
 }

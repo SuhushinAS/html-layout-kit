@@ -1,9 +1,7 @@
 {
     "author": "SuhushinAS",
     "dependencies": {
-        "normalize.css": "^8.0.1",
-        "swiper": "^5.2.0",
-        "tabbyjs": "^12.0.3"
+        "normalize.css": "^8.0.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.7.0",
@@ -18,8 +16,6 @@
         "@babel/preset-env": "^7.7.1",
         "@babel/preset-flow": "^7.0.0",
         "@babel/runtime": "^7.7.1",
-        "@userstory/eslint-config": "^0.37.0",
-        "@userstory/stylelint-config": "^0.36.0",
         "autoprefixer": "^9.7.1",
         "babel-loader": "^8.0.6",
         "clean-webpack-plugin": "^3.0.0",
@@ -33,11 +29,9 @@
         "html-critical-webpack-plugin": "^2.1.0",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
-        "husky": "^3.0.9",
         "imagemin-webp-webpack-plugin": "^3.2.2",
         "less": "^3.10.3",
         "less-loader": "^5.0.0",
-        "lint-staged": "^9.4.2",
         "mini-css-extract-plugin": "^0.8.0",
         "offline-plugin": "^5.0.7",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -59,27 +53,11 @@
         "node": ">= 12.0.0",
         "npm": ">= 6.0.0"
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "flow check && lint-staged"
-        }
-    },
     "keywords": [
         "html, layout, kit"
     ],
-    "license": "UNLICENSED",
-    "lint-staged": {
-        "!(*min).{css,less}": [
-            "stylelint --fix",
-            "git add"
-        ],
-        "!(*min).{js,jsx}": [
-            "eslint --fix",
-            "git add"
-        ]
-    },
+    "license": "MIT",
     "name": "html-layout-kit",
-    "private": true,
     "repository": {
         "type": "git",
         "url": "git@github.com:SuhushinAS/html-layout-kit.git"
@@ -87,11 +65,8 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack -p --progress --mode=production",
         "dev": "webpack -d --watch --mode=development",
-        "eslint": "eslint --ext .js,.jsx --fix ./src",
         "flow": "flow",
-        "lint": "npm run eslint && npm run stylelint",
-        "start": "webpack-dev-server -d --mode=development",
-        "stylelint": "stylelint ./**/*.{css,less} --fix"
+        "start": "webpack-dev-server -d --mode=development"
     },
     "version": "0.0.1"
 }
