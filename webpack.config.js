@@ -1,44 +1,106 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const fs = require('fs');
+const HtmlBeautifyPlugin = require('html-beautify-webpack-plugin');
+const HtmlCriticalWebpackPlugin = require('html-critical-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OfflinePlugin = require('offline-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = 'production' === nodeEnv;
-const pathList = {
-    dist: path.join(__dirname, 'www/build'),
-    public: path.join(__dirname, 'www'),
-    src: path.join(__dirname, 'src'),
+const paths = {
+    dist: path.join(__dirname, 'www'),
+    pages: './src/pages',
+    public: path.join(__dirname, 'public'),
 };
 const stats = {
     colors: true,
     errorDetails: true,
-    reasons: isProd,
+    reasons: false,
 };
 
-module.exports = function(env, argv) {
+const pages = fs.readdirSync(paths.pages);
 
+module.exports = function() {
     return {
-        bail: isProd,
-        context: pathList.src,
-        devServer: isProd ? {} : {
-            contentBase: pathList.public,
-            historyApiFallback: true,
+        devServer: {
+            contentBase: paths.dist,
             host: '0.0.0.0',
             hot: true,
             port: 8000,
             stats,
+            writeToDisk: true,
         },
         devtool: isProd ? false : 'eval',
-        entry: {
-            index: 'index',
-        },
+        entry: pages.reduce((acc, page) => ({...acc, [page]: `${paths.pages}/${page}/index.js`}), {}),
         module: {
-            rules: getRuleList(),
+            rules: [
+                {
+                    test: /\.html$/u,
+                    use: {
+                        loader: 'html-loader',
+                        options: {interpolate: true, minimize: false},
+                    },
+                },
+                {
+                    exclude: /node_modules/u,
+                    test: /\.(js|jsx)$/u,
+                    use: {
+                        loader: 'babel-loader',
+                        options: {cacheDirectory: true},
+                    },
+                },
+                {
+                    test: /\.css$/u,
+                    use: [isProd ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'postcss-loader'],
+                },
+                {
+                    test: /\.less$/u,
+                    use: [
+                        isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+                        'css-loader',
+                        'postcss-loader',
+                        {
+                            loader: 'less-loader',
+                            options: {javascriptEnabled: true},
+                        },
+                    ],
+                },
+                {
+                    test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/u,
+                    use: {
+                        loader: 'file-loader',
+                        options: {name: 'fonts/[name].[hash:5].[ext]'},
+                    },
+                },
+                {
+                    test: /\.svg$/u,
+                    use: {
+                        loader: 'svg-sprite-loader',
+                        options: {
+                            esModule: true,
+                            extract: true,
+                            spriteFilename: 'sprite-[hash:5].svg',
+                        },
+                    },
+                },
+                {
+                    test: /.*\.(png|jpg|jpeg|gif)$/iu,
+                    use: {
+                        loader: 'file-loader',
+                        options: {name: 'img/[name].[hash:5].[ext]'},
+                    },
+                },
+            ],
         },
         node: {
             child_process: 'empty',
@@ -48,218 +110,116 @@ module.exports = function(env, argv) {
             tls: 'empty',
         },
         optimization: {
+            minimize: isProd,
             minimizer: [
-                new UglifyJsPlugin({
-                    cache: true,
-                    parallel: true,
-                    sourceMap: true,
-                    uglifyOptions: {
-                        compress: {
-                            comparisons: true,
-                            conditionals: true,
-                            dead_code: true,
-                            evaluate: true,
-                            if_return: true,
-                            join_vars: true,
-                            sequences: true,
-                            unused: true,
-                        },
+                new TerserPlugin({
+                    extractComments: false,
+                    terserOptions: {
                         output: {
-                            ascii_only: true,
                             comments: false,
                         },
-                        sourceMap: false,
                     },
                 }),
-                new OptimizeCSSAssetsPlugin(),
+                new OptimizeCSSAssetsPlugin({
+                    canPrint: true,
+                    cssProcessorPluginOptions: {preset: ['default', {discardComments: {removeAll: true}}]},
+                }),
             ],
-            splitChunks: {
-                automaticNameDelimiter: '-',
-            },
+            namedModules: !isProd,
+            noEmitOnErrors: isProd,
         },
         output: {
-            filename: '[name].min.js',
+            filename: 'js/[name].min.js',
             library: ['htmlLayoutKit'],
-            path: pathList.dist,
-            publicPath: '/build/',
+            path: paths.dist,
+            publicPath: '/',
         },
-        plugins: getPluginList(),
+        plugins: [
+            ...getPlugins(),
+            new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(nodeEnv)}}),
+            new webpack.IgnorePlugin(/^\.\/locale$/u, /moment$/u),
+            ...pages.map(getHTML),
+            new HtmlBeautifyPlugin({config: {html: {wrap_line_length: 150}}}),
+            new SpriteLoaderPlugin({plainSprite: true}),
+            new CopyPlugin([{from: paths.public, to: paths.dist}]),
+            new OfflinePlugin({
+                externals: ['/api/v1/config'],
+            }),
+        ],
         resolve: {
             extensions: ['.js', '.jsx'],
-            modules: [
-                './',
-                './src/',
-                'node_modules',
-                pathList.src,
-                path.join(__dirname, './node_modules'),
-            ],
+            modules: ['src', 'node_modules'],
         },
         stats,
         watchOptions: {aggregateTimeout: 100},
     };
 };
 
-/**
- * Фнукция возвращает набор правил обработки.
- * @returns {*[]} Набор правил обработки.
- */
-function getRuleList() {
-    const ruleListBase = getRuleListBase();
-    const ruleListStyle = getRuleListStyle();
-    const ruleListResource = getRuleListResource();
-
-    return ruleListBase.concat(ruleListStyle, ruleListResource);
+function getHTML(page) {
+    return new HtmlWebpackPlugin({
+        chunks: [page],
+        filename: `${page}.html`,
+        hash: true,
+        inject: true,
+        minify: false,
+        template: 'src/index.tpl',
+        templateParameters: {page},
+    });
 }
 
-/**
- * Фнукция возвращает набор базовых правил обработки.
- * @returns {*[]} Набор правил обработки.
- */
-function getRuleListBase() {
-    return [
-        {
-            test: /\.html$/,
-            use: {
-                loader: 'html-loader',
-            },
+function getCritical(page) {
+    const fileName = `${page}.html`;
+
+    return new HtmlCriticalWebpackPlugin({
+        base: paths.dist,
+        dest: fileName,
+        extract: true,
+        height: 565,
+        inline: true,
+        minify: true,
+        penthouse: {
+            blockJSRequests: false,
         },
-        {
-            exclude: /node_modules/,
-            test: /\.(js|jsx)$/,
-            use: {
-                loader: 'babel-loader',
-                options: {cacheDirectory: true},
-            },
-        },
-    ];
+        src: fileName,
+        width: 375,
+    });
 }
 
-/**
- * Фнукция возвращает набор правил обработки стилей.
- * @returns {*[]} Набор правил обработки.
- */
-function getRuleListStyle() {
-    return [
-        {
-            test: /\.css$/,
-            use: [
-                isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-                'css-loader',
-                'postcss-loader',
-            ],
-        },
-        {
-            test: /\.less$/,
-            use: [
-                isProd ? MiniCssExtractPlugin.loader : 'style-loader',
-                'css-loader',
-                'postcss-loader',
-                'less-loader',
-                {
-                    loader: 'less-loader',
-                    options: {
-                        javascriptEnabled: true,
-                    },
-                },
-            ],
-        },
-    ];
-}
-
-/**
- * Фнукция возвращает набор правил обработки ресурсов.
- * @returns {*[]} Набор правил обработки.
- */
-function getRuleListResource() {
-    return [
-        {
-            test: /\.(ttf|eot|woff|woff2)(\?[a-z0-9]+)?$/,
-            use: {
-                loader: 'file-loader',
-                options: {name: 'fonts/[name].[hash:5].[ext]'},
-            },
-        },
-        {
-            test: /.*\.(png|jpg|jpeg|gif|svg)$/i,
-            use: {
-                loader: 'file-loader',
-                options: {name: 'img/[name].[hash:5].[ext]'},
-            },
-        },
-    ];
-}
-
-/**
- * Фнукция возвращает набор плагинов.
- * @returns {*[]} Набор модулей.
- */
-function getPluginList() {
-    const pluginListBase = getPluginListBase();
-    let pluginListOptional = [];
-
+function getPlugins() {
     if (isProd) {
-        pluginListOptional = getPluginListProd();
-    } else {
-        pluginListOptional = getPluginListDev();
+        return [
+            new CleanWebpackPlugin({
+                dry: false,
+                verbose: true,
+            }),
+            new FaviconsWebpackPlugin({
+                cache: true,
+                favicons: {
+                    appName: 'HTML Layout Kit',
+                    background: '#0f1418',
+                    theme_color: '#0f1418',
+                },
+                inject: true,
+                logo: 'favicon.svg',
+                outputPath: '/',
+                prefix: '/',
+                publicPath: '/',
+            }),
+            new MiniCssExtractPlugin({
+                allChunks: true,
+                disable: false,
+                filename: 'css/[name].min.css',
+            }),
+            new webpack.LoaderOptionsPlugin({
+                debug: false,
+                minimize: true,
+                options: {customInterpolateName: (url) => url.toLowerCase()},
+            }),
+            ...pages.map(getCritical),
+            new ImageminWebpWebpackPlugin(),
+            // new BundleAnalyzerPlugin(),
+        ];
     }
 
-    return pluginListBase.concat(pluginListOptional);
-}
-
-/**
- * Фнукция возвращает базовый набор плагинов.
- * @returns {*[]} Набор модулей.
- */
-function getPluginListBase() {
-    return [
-        new webpack.DefinePlugin({
-            'process.env': {NODE_ENV: JSON.stringify(nodeEnv)},
-        }),
-        new HtmlWebpackPlugin({
-            alwaysWriteToDisk: true,
-            filename: path.join(pathList.public, './index.html'),
-            hash: true,
-            inject: true,
-            template: path.join(pathList.src, './index.htm'),
-        }),
-        new HtmlWebpackHarddiskPlugin(),
-        new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    ];
-}
-
-/**
- * Фнукция возвращает набор плагинов для Dev-режима.
- * @returns {*[]} Набор модулей.
- */
-function getPluginListProd() {
-    return [
-        new CleanWebpackPlugin(pathList.dist, {
-            dry: false,
-            verbose: true,
-        }),
-        new MiniCssExtractPlugin({
-            allChunks: true,
-            disable: false,
-            filename: '[name].min.css',
-        }),
-        new webpack.LoaderOptionsPlugin({
-            debug: false,
-            minimize: true,
-            options: {
-                customInterpolateName: (url) => url.toLowerCase(),
-            },
-        }),
-        new webpack.NoEmitOnErrorsPlugin(),
-    ];
-}
-
-/**
- * Фнукция возвращает набор плагинов для Dev-режима.
- * @returns {*[]} Набор модулей.
- */
-function getPluginListDev() {
-    return [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
-    ];
+    return [new webpack.HotModuleReplacementPlugin()];
 }

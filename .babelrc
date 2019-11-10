@@ -6,6 +6,7 @@
                 "modules": false
             }
         ],
+        "@babel/preset-flow"
     ],
     "plugins": [
         "@babel/transform-runtime",

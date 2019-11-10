@@ -1,0 +1,29 @@
+@import (reference) 'adaptive';
+@import (reference) 'fluid-prop';
+
+.box(@offset-min, @offset-mid, @offset-max) {
+    @screen-min: @size-sm-min;
+    @screen-mid: @size-lg-min;
+    @screen-max: @size-xl-min;
+
+    .fluid-prop(margin-left, @offset-min, @screen-min, @offset-mid, @screen-mid);
+    .fluid-prop(margin-right, @offset-min, @screen-min, @offset-mid, @screen-mid);
+    .fluid-prop(margin-left, @offset-mid, @screen-mid, @offset-max, @screen-max);
+    .fluid-prop(margin-right, @offset-mid, @screen-mid, @offset-max, @screen-max);
+
+    margin-left: @offset-max;
+    margin-right: @offset-max;
+
+    @media (max-width: @screen-min) {
+        margin-left: @offset-min;
+        margin-right: @offset-min;
+    }
+}
+
+.box {
+    .box(16px, 140px, 240px);
+
+    &_wide {
+        .box(16px, 48px, 64px);
+    }
+}

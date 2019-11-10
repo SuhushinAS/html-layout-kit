@@ -1,0 +1,3 @@
+{
+    "extends": "@userstory/stylelint-config"
+}
