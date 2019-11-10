@@ -33,12 +33,12 @@ const pages = fs.readdirSync(paths.pages);
 module.exports = function() {
     return {
         devServer: {
-            contentBase: paths.dist,
+            contentBase: paths.public,
             host: '0.0.0.0',
             hot: true,
             port: 8000,
             stats,
-            writeToDisk: true,
+            writeToDisk: false,
         },
         devtool: isProd ? false : 'eval',
         entry: pages.reduce((acc, page) => ({...acc, [page]: `${paths.pages}/${page}/index.js`}), {}),
@@ -189,31 +189,11 @@ function getPrePlugins() {
                 dry: false,
                 verbose: true,
             }),
-            new FaviconsWebpackPlugin({
-                cache: true,
-                favicons: {
-                    appName: 'HTML Layout Kit',
-                    background: '#0f1418',
-                    theme_color: '#0f1418',
-                },
-                inject: true,
-                logo: 'favicon.svg',
-                outputPath: '/',
-                prefix: '/',
-                publicPath: '/',
-            }),
-            new MiniCssExtractPlugin({
-                allChunks: true,
-                disable: false,
-                filename: 'css/[name].min.css',
-            }),
             new webpack.LoaderOptionsPlugin({
                 debug: false,
                 minimize: true,
                 options: {customInterpolateName: (url) => url.toLowerCase()},
             }),
-            ...pages.map(getCritical),
-            new ImageminWebpWebpackPlugin(),
             // new BundleAnalyzerPlugin(),
         ];
     }
@@ -224,6 +204,19 @@ function getPrePlugins() {
 function getPostPlugins() {
     if (isProd) {
         return [
+            new FaviconsWebpackPlugin({
+                cache: true,
+                favicons: {
+                    appName: 'HTML Layout Kit',
+                    background: '#ffffff',
+                    theme_color: '#ffffff',
+                },
+                inject: true,
+                logo: 'favicon.svg',
+                outputPath: '/',
+                prefix: '/',
+                publicPath: '/',
+            }),
             new HtmlBeautifyPlugin({
                 config: {
                     html: {
@@ -231,6 +224,13 @@ function getPostPlugins() {
                     },
                 },
             }),
+            new MiniCssExtractPlugin({
+                allChunks: true,
+                disable: false,
+                filename: 'css/[name].min.css',
+            }),
+            ...pages.map(getCritical),
+            new ImageminWebpWebpackPlugin(),
             new OfflinePlugin({
                 externals: ['/api/v1/config'],
             }),
