@@ -1,4 +1,8 @@
 .idea
+.idea_modules/
+.npm
+*.log
+flow.log.old
+npm-debug.log*
+/www/*
 node_modules
-www/build/*
-www/index.html

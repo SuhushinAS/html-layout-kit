@@ -1,71 +1,48 @@
 @import '~normalize.css/normalize.css';
-
-html, body {
-    height: 100%;
-}
-
-body {
-    display: table;
-    font-family: Roboto, Helvetica, sans-serif;
-    font-size: 14px;
-    table-layout: fixed;
-    width: 100%;
-}
-
-button, input, optgroup, select, textarea {
-    font-family: Roboto, Helvetica, sans-serif;
-}
+@import 'font';
 
 * {
     box-sizing: border-box;
 }
 
-h1 {
-    font-size: 25px;
-    font-weight: 500;
+html,
+body,
+#root {
+    height: 100%;
     margin: 0;
+    overflow: hidden;
+    width: 100%;
+}
+
+body {
+    .f-z_p;
+
+    font-family: @pt-root-ui-name, Helvetica, sans-serif;
+    word-break: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    .f-z_h1;
+
+    font-weight: 300;
 }
 
 h2 {
-    font-size: 23px;
-    font-weight: 500;
-    margin: 0;
-}
+    .f-z_h2;
 
-h3 {
-    font-size: 21px;
-    font-weight: 500;
-    margin: 0;
-}
-
-h4 {
-    font-size: 19px;
-    font-weight: 500;
-    margin: 0;
-}
-
-h5 {
-    font-size: 17px;
-    font-weight: 500;
-    margin: 0;
-}
-
-h6 {
-    font-size: 15px;
-    font-weight: 500;
-    margin: 0;
-}
-
-p, li {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0;
-}
-
-a {
-    color: inherit;
-    fill: inherit;
-    text-decoration: none;
+    font-weight: 300;
 }
 
 img {

@@ -1,0 +1,70 @@
+@import (reference) 'adaptive';
+
+.d_b {
+    display: block;
+}
+
+.d_n {
+    display: none;
+}
+
+.d_f {
+    display: flex;
+}
+
+.d_i-b {
+    display: inline-block;
+}
+
+.d_i {
+    display: inline;
+}
+
+.v-a_b {
+    vertical-align: bottom;
+}
+
+.v-a_m {
+    vertical-align: middle;
+}
+
+.v-a_t {
+    vertical-align: top;
+}
+
+.make-display-media(@class, @query) {
+    .d_@{class}_b {
+        @media @query {
+            display: block;
+        }
+    }
+
+    .d_@{class}_f {
+        @media @query {
+            display: flex;
+        }
+    }
+
+    .d_@{class}_i-b {
+        @media @query {
+            display: inline-block;
+        }
+    }
+
+    .d_@{class}_n {
+        @media @query {
+            display: none;
+        }
+    }
+}
+
+.make-display(@class) {
+    @query: ~'@{class}-min';
+    .make-display-media(@class, @@query);
+}
+
+.make-display(xs);
+.make-display(sm);
+.make-display(md);
+.make-display(lg);
+.make-display(xl);
