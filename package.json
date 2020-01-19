@@ -55,7 +55,7 @@
         "npm": ">= 6.0.0"
     },
     "keywords": [
-        "html, layout, kit"
+        "html", "layout", "kit"
     ],
     "license": "MIT",
     "name": "html-layout-kit",
