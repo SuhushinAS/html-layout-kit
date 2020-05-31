@@ -8,15 +8,15 @@
     text-transform: uppercase;
 }
 
-.text-ellipsis {
+.ellipsis(@count-lines) when (@count-lines = 1) {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.ellipsis(@countLines) {
+.ellipsis(@count-lines) when (@count-lines > 1) {
     .prop(-webkit-box-orient, vertical);
-    .prop(-webkit-line-clamp, @countLines);
+    .prop(-webkit-line-clamp, @count-lines);
     .prop(display, -webkit-box);
 
     overflow: hidden;

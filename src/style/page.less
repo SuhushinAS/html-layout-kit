@@ -1,11 +1,12 @@
+@import (reference) 'color';
+
 .page {
-    min-height: 100%;
+    flex-grow: 1;
 
-    &_offset {
-        padding: 40px 0 32px;
-
-        @media @phone {
-            padding: 24px 0 32px;
-        }
+    &__block {
+        background-color: @c-white-1;
+        margin-top: 16px;
+        padding-bottom: 16px;
+        padding-top: 16px;
     }
 }

@@ -1,0 +1,13 @@
+<div class="layout">
+    <div class="layout__header">
+        {{> modules/layout/header/index }}
+    </div>
+    <div class="layout__body">
+        {{> @partial-block }}
+    </div>
+    {{#if is-footer}}
+        <div class="layout__footer">
+            {{> modules/layout/footer/index }}
+        </div>
+    {{/if}}
+</div>

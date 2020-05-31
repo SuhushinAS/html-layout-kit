@@ -1,8 +1,10 @@
+.DS_Store
 .idea
 .idea_modules/
 .npm
 *.log
-flow.log.old
 npm-debug.log*
-/www/*
+report.*.json
 node_modules
+templates/*
+www/*

@@ -1,29 +1,49 @@
 @import (reference) 'adaptive';
+@import (reference) 'animation';
+@import (reference) 'grid';
 @import (reference) 'fluid-prop';
 
-.box(@offset-min, @offset-mid, @offset-max) {
-    @screen-min: @size-sm-min;
-    @screen-mid: @size-lg-min;
-    @screen-max: @size-xl-min;
+.box {
+    margin-left: @grid-offset;
+    margin-right: @grid-offset;
 
-    .fluid-prop(margin-left, @offset-min, @screen-min, @offset-mid, @screen-mid);
-    .fluid-prop(margin-right, @offset-min, @screen-min, @offset-mid, @screen-mid);
-    .fluid-prop(margin-left, @offset-mid, @screen-mid, @offset-max, @screen-max);
-    .fluid-prop(margin-right, @offset-mid, @screen-mid, @offset-max, @screen-max);
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -@grid-left;
+        margin-right: -@grid-right;
+    }
 
-    margin-left: @offset-max;
-    margin-right: @offset-max;
+    &__col {
 
-    @media (max-width: @screen-min) {
-        margin-left: @offset-min;
-        margin-right: @offset-min;
+        .col-make(xs, @xs-min);
+
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        padding-left: @grid-left;
+        padding-right: @grid-right;
+        transition: flex-basis @animation, max-width @animation;
     }
 }
 
-.box {
-    .box(16px, 140px, 240px);
+.col-make(@class, @query) {
+    .col-loop(@grid-columns, @class, @query);
 
-    &_wide {
-        .box(16px, 48px, 64px);
+    &_@{class}_auto {
+        @media @query {
+            flex-basis: auto;
+        }
+    }
+}
+
+.col-loop(@index, @class, @query) when (@index >= 0) {
+    .col-loop((@index - 1), @class, @query);
+
+    &_@{class}_@{index} {
+        @media @query {
+            flex-basis: percentage((@index / @grid-columns));
+            max-width: percentage((@index / @grid-columns));
+        }
     }
 }

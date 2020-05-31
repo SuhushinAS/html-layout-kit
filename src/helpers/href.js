@@ -1,11 +1,16 @@
 // @flow
-
 import querystring from 'querystring';
 
 export type TQuery = {
     [string]: mixed,
 };
 
+/**
+ * Получить адрес.
+ * @param {string} url Адрес.
+ * @param {*} query Параметры.
+ * @returns {string} Адрес.
+ */
 export function getHref(url: string, query: TQuery): string {
     const hrefParts = getHrefParts(url);
     const hrefList = [hrefParts.path];
@@ -18,6 +23,11 @@ export function getHref(url: string, query: TQuery): string {
     return hrefList.join('?');
 }
 
+/**
+ * Получить части адреса.
+ * @param {string} href Адрес.
+ * @returns {{path: string, search: string}} Части адреса.
+ */
 export function getHrefParts(href: string) {
     const [path, ...searchList] = href.split('?');
     return {
@@ -26,14 +36,31 @@ export function getHrefParts(href: string) {
     };
 }
 
+/**
+ * Получить параметры в строке.
+ * @param {string} search Параметры в строке.
+ * @param {*} query Параметры в объекте.
+ * @returns {string} Параметры в строке.
+ */
 export function getSearch(search: string, query: TQuery = {}): string {
     return querystring.stringify(getQuery(search, query));
 }
 
+/**
+ * Получить параметры в объекте.
+ * @param {string} search Параметры в строке.
+ * @param {*} query Параметры в объекте.
+ * @returns {*} Параметры в объекте.
+ */
 export function getQuery(search: string, query: TQuery = {}): TQuery {
     return getQueryClean({...querystring.parse(search), ...query});
 }
 
+/**
+ * Очистить параметры.
+ * @param {*} query Параметры в объекте.
+ * @returns {*} Параметры в объекте.
+ */
 export function getQueryClean(query: TQuery) {
     return Object.keys(query).reduce((prev, key) => {
         if ('undefined' !== typeof query[key]) {

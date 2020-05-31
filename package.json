@@ -1,73 +1,91 @@
 {
     "author": "SuhushinAS",
     "dependencies": {
-        "handlebars": "^4.5.3",
-        "normalize.css": "^8.0.1"
+        "autosize": "^4.0.2",
+        "bootstrap": "^4.5.0",
+        "handlebars": "^4.7.6",
+        "inputmask": "^5.0.3",
+        "jquery": "^3.5.1",
+        "leaflet": "^1.6.0",
+        "normalize.css": "^8.0.1",
+        "nouislider": "^14.5.0",
+        "select2": "^4.0.13",
+        "swiper": "^5.4.0"
     },
+    "description": "HtmlLayoutKit",
     "devDependencies": {
-        "@babel/cli": "^7.7.5",
-        "@babel/core": "^7.7.5",
-        "@babel/plugin-proposal-class-properties": "^7.7.4",
-        "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
-        "@babel/plugin-proposal-json-strings": "^7.7.4",
-        "@babel/plugin-syntax-dynamic-import": "^7.7.4",
-        "@babel/plugin-syntax-import-meta": "^7.7.4",
-        "@babel/plugin-transform-flow-strip-types": "^7.7.4",
-        "@babel/plugin-transform-runtime": "^7.7.6",
-        "@babel/preset-env": "^7.7.6",
-        "@babel/preset-flow": "^7.7.4",
-        "@babel/runtime": "^7.7.6",
-        "autoprefixer": "^9.7.3",
-        "babel-loader": "^8.0.6",
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.6",
+        "@babel/plugin-proposal-class-properties": "^7.8.3",
+        "@babel/plugin-proposal-export-namespace-from": "^7.8.3",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/plugin-transform-runtime": "^7.9.6",
+        "@babel/preset-env": "^7.9.6",
+        "@suhushinas/eslint-config": "^2.0.7",
+        "@suhushinas/stylelint-config": "^1.0.0",
+        "autoprefixer": "^9.8.0",
+        "babel-loader": "^8.1.0",
         "clean-webpack-plugin": "^3.0.0",
-        "copy-webpack-plugin": "^5.1.1",
-        "cross-env": "^6.0.3",
-        "css-loader": "^3.3.2",
-        "favicons-webpack-plugin": "^1.0.2",
-        "file-loader": "^5.0.2",
-        "flow-bin": "^0.114.0",
+        "copy-webpack-plugin": "^6.0.1",
+        "cross-env": "^7.0.2",
+        "css-loader": "^3.5.3",
+        "file-loader": "^6.0.0",
+        "handlebars-loader": "^1.7.1",
         "html-beautify-webpack-plugin": "^1.0.5",
-        "html-critical-webpack-plugin": "^2.1.0",
-        "html-loader": "^0.5.5",
+        "html-loader": "^1.1.0",
         "html-webpack-plugin": "^3.2.0",
-        "imagemin-webp-webpack-plugin": "^3.3.1",
-        "less": "^3.10.3",
-        "less-loader": "^5.0.0",
-        "mini-css-extract-plugin": "^0.8.0",
-        "offline-plugin": "^5.0.7",
+        "husky": "^4.2.5",
+        "less": "^3.11.1",
+        "less-loader": "^6.1.0",
+        "lint-staged": "^10.2.2",
+        "mini-css-extract-plugin": "^0.9.0",
         "optimize-css-assets-webpack-plugin": "^5.0.3",
-        "postcss": "^7.0.24",
-        "postcss-flexbugs-fixes": "^4.1.0",
+        "postcss": "^7.0.30",
+        "postcss-flexbugs-fixes": "^4.2.1",
         "postcss-gradient-transparency-fix": "^3.0.0",
         "postcss-loader": "^3.0.0",
-        "style-loader": "^1.0.1",
-        "svg-sprite-loader": "^4.1.3",
-        "terser-webpack-plugin": "^2.3.0",
-        "url-loader": "^3.0.0",
-        "webpack": "^4.41.3",
-        "webpack-cli": "^3.3.10",
-        "webpack-dev-server": "^3.9.0"
+        "style-loader": "^1.2.1",
+        "svg-sprite-loader": "^5.0.0",
+        "terser-webpack-plugin": "^3.0.1",
+        "url-loader": "^4.1.0",
+        "webpack": "^4.43.0",
+        "webpack-cli": "^3.3.11",
+        "webpack-dev-server": "^3.11.0"
     },
-    "description": "HTML Layout kit",
     "engineStrict": true,
     "engines": {
         "node": ">= 12.0.0",
         "npm": ">= 6.0.0"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "keywords": [
-        "html", "layout", "kit"
+        "HtmlLayoutKit"
     ],
-    "license": "MIT",
+    "license": "UNLICENSED",
+    "lint-staged": {
+        "!(*min).{css,less}": [
+            "stylelint --fix"
+        ],
+        "!(*min).{js,jsx}": [
+            "eslint --fix"
+        ]
+    },
     "name": "html-layout-kit",
+    "private": true,
     "repository": {
         "type": "git",
         "url": "git@github.com:SuhushinAS/html-layout-kit.git"
     },
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack -p --progress --mode=production",
-        "dev": "webpack -d --watch --mode=development",
-        "flow": "flow",
-        "start": "webpack-dev-server -d --mode=development"
+        "eslint": "eslint --ext .js,.jsx --fix ./src",
+        "lint": "npm run eslint && npm run stylelint",
+        "start": "cross-env webpack-dev-server -d --mode=development",
+        "stylelint": "stylelint ./**/*.{css,less} --fix"
     },
     "version": "0.0.1"
 }
