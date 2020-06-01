@@ -1,10 +1,10 @@
 .DS_Store
-.idea
+.idea/
 .idea_modules/
 .npm
 *.log
 npm-debug.log*
 report.*.json
-node_modules
-templates/*
-www/*
+node_modules/
+templates/
+www/
