@@ -226,7 +226,7 @@ function getPostPlugins() {
  */
 function getHTML(page) {
     return new HtmlWebpackPlugin({
-        favicon: 'src/favicon.svg',
+        favicon: 'src/images/image.svg',
         filename: `${page}.html`,
         hash: isProd,
         inject: true,
