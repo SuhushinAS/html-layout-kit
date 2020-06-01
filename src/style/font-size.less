@@ -1,27 +1,4 @@
-@font-xxxl: 72px;
-@font-xxl: 48px;
-@font-xl: 36px;
-@font-l: 24px;
-@font-m: 20px;
-@font-s: 18px;
-@font-xs: 16px;
-@font-xxs: 14px;
-@font-xxxs: 12px;
-
-@lh-xxxl: 91px;
-@lh-xxl: 60px;
-@lh-xl: 45px;
-@lh-l: 30px;
-@lh-m: 25px;
-@lh-s: 23px;
-@lh-xs: 20px;
-@lh-xxs: 18px;
-@lh-xxxs: 15px;
-
-.font-size(@size) {
-    @font-size: ~'font-@{size}';
-    @line-height: ~'lh-@{size}';
-
-    font-size: @@font-size;
-    line-height: @@line-height;
+.font-size(@font-size, @line-height) {
+    font-size: @font-size;
+    line-height: @line-height;
 }

@@ -1,0 +1,22 @@
+<meta content="{{head.description}}" name="description" />
+<meta content="{{head.keywords}}" name="keywords" />
+<meta content="{{head.title}}" name="title">
+<meta content="{{head.url}}" name="url">
+
+<meta content="{{head.description}}" property="og:description">
+{{#[helpers/with-image] head.image}}
+    <meta content="{{src}}" property="og:image">
+{{/[helpers/with-image]}}
+<meta content="{{head.title}}" property="og:title">
+<meta content="website" property="og:type">
+<meta content="{{head.url}}" property="og:url">
+
+<meta content="summary" property="twitter:card">
+<meta content="{{head.description}}" property="twitter:description">
+{{#[helpers/with-image] head.image}}
+    <meta content="{{src}}" property="twitter:image">
+{{/[helpers/with-image]}}
+<meta content="{{head.title}}" property="twitter:title">
+<meta content="{{head.url}}" property="twitter:url">
+
+<title>{{head.title}}</title>

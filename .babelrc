@@ -1,17 +1,17 @@
 {
-    "presets": [
-        [
-            "@babel/env",
-            {
-                "modules": false
-            }
-        ],
-        "@babel/preset-flow"
-    ],
     "plugins": [
         "@babel/transform-runtime",
-        "@babel/proposal-export-namespace-from",
-        "@babel/syntax-dynamic-import",
-        "@babel/proposal-class-properties"
+        "@babel/plugin-proposal-export-namespace-from",
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-proposal-class-properties"
+    ],
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "corejs": 3,
+                "useBuiltIns": "entry"
+            }
+        ]
     ]
 }

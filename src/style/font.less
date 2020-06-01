@@ -1,82 +1,80 @@
 @import (reference) 'font-face';
-@import (reference) 'font-fluid';
 @import (reference) 'font-size';
+@import (reference) 'font-weight';
 
-@pt-root-ui-path: '~fonts/';
-@pt-root-ui-name: 'PT Root UI';
+.f_h1 {
+    .font-size(22px, 28px);
 
-.font-face(@pt-root-ui-name, 'pt-root-ui-regular', @pt-root-ui-path, 400, normal);
-.font-face(@pt-root-ui-name, 'pt-root-ui-medium', @pt-root-ui-path, 500, normal);
-.font-face(@pt-root-ui-name, 'pt-root-ui-light', @pt-root-ui-path, 300, normal);
-.font-face(@pt-root-ui-name, 'pt-root-ui-bold', @pt-root-ui-path, 600, normal);
-
-.f-z_title {
-    .make-fluid-font(@font-xl, @lh-xl, @font-xxxl, @lh-xxxl);
+    font-weight: 700;
 }
 
-.f-z_h1 {
-    .make-fluid-font(@font-l, @lh-l, @font-xxl, @lh-xxl);
+.f_h2 {
+    .font-size(18px, 24px);
+
+    font-weight: 500;
 }
 
-.f-z_h2 {
-    .make-fluid-font(@font-l, @lh-l, @font-xl, @lh-xl);
+.f_h3 {
+    .font-size(16px, 20px);
+
+    font-weight: 500;
 }
 
-.f-z_p {
-    .make-fluid-font(@font-xs, @lh-xs, @font-l, @lh-l);
+.f_h4 {
+    .font-size(14px, 18px);
+
+    font-weight: 500;
 }
 
-.f-z_small {
-    .make-fluid-font(@font-xs, @lh-xs, @font-m, @lh-m);
+.f_p {
+    .font-size(14px, 18px);
+
+    font-weight: 400;
 }
 
-.f-z_xsmall {
-    .make-fluid-font(@font-xxs, @lh-xxs, @font-s, @lh-s);
+.f_caption {
+    .font-size(12px, 16px);
+
+    font-weight: 400;
 }
 
-.f-z_xxxl {
-    .font-size(xxxl);
+.f_badge {
+    .font-size(12px, 16px);
+
+    font-weight: 300;
 }
 
-.f-z_xxl {
-    .font-size(xxl);
+.f_badge-strong {
+    .font-size(12px, 16px);
+
+    font-weight: 400;
 }
 
-.f-z_xl {
-    .font-size(xl);
+.f_price {
+    .font-size(14px, 18px);
+
+    font-weight: 500;
 }
 
-.f-z_l {
-    .font-size(l);
+.f_old-price {
+    .font-size(12px, 16px);
+
+    font-weight: 300;
 }
 
-.f-z_m {
-    .font-size(m);
-}
+@roboto-font-path: '~fonts/roboto/';
+@roboto-font-name: 'Roboto';
 
-.f-z_s {
-    .font-size(s);
-}
-
-.f-z_xs {
-    .font-size(xs);
-}
-
-.f-z_xxs {
-    .font-size(xxs);
-}
-
-.f-z_xxxs {
-    .font-size(xxxs);
-}
-
-.font-weight(@name, @size) {
-    .f-w_@{name} {
-        font-weight: @size;
-    }
-}
+.font-face(@roboto-font-name, 'roboto-light', @roboto-font-path, 300, normal);
+.font-face(@roboto-font-name, 'roboto-light-italic', @roboto-font-path, 300, italic);
+.font-face(@roboto-font-name, 'roboto-regular', @roboto-font-path, 400, normal);
+.font-face(@roboto-font-name, 'roboto-regular-italic', @roboto-font-path, 400, italic);
+.font-face(@roboto-font-name, 'roboto-medium', @roboto-font-path, 500, normal);
+.font-face(@roboto-font-name, 'roboto-medium-italic', @roboto-font-path, 500, italic);
+.font-face(@roboto-font-name, 'roboto-bold', @roboto-font-path, 700, normal);
+.font-face(@roboto-font-name, 'roboto-bold-italic', @roboto-font-path, 700, italic);
 
 .font-weight(light, 300);
 .font-weight(regular, 400);
 .font-weight(medium, 500);
-.font-weight(bold, 600);
+.font-weight(bold, 700);
