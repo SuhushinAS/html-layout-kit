@@ -1,5 +1,10 @@
+{{#*inline "header-block"}}{{> modules/layout/header/index }}{{/inline}}
+{{#*inline "footer-block"}}{{> modules/layout/footer/index }}{{/inline}}
 {{#> modules/layout/layout/index }}
     <h1>HTML Layout Kit</h1>
+    {{#*inline "example-block"}}
+        <h2>Hello</h2>
+    {{/inline}}
     {{> modules/example/index logo="images/logo.svg" }}
     <div>
         {{> modules/common/svg-icon/index src="images/logo.svg" }}
