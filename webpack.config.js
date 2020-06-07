@@ -34,6 +34,7 @@ const webpackConfig = {
         compress: true,
         contentBase: paths.public,
         disableHostCheck: true,
+        historyApiFallback: true,
         host: '0.0.0.0',
         hot: true,
         port: 8000,
