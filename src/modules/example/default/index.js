@@ -1,5 +1,5 @@
 // @flow
-import 'modules/example/default/style.less';
+import './style.less';
 
 /**
  * Class ExampleDefault.
