@@ -43,7 +43,7 @@ class ExampleCustom extends HTMLElement {
      * @param {*} newValue Новое значение.
      */
     // attributeChangedCallback(name, oldValue, newValue) {
-    //     this.innerHTML = template({value: newValue});
+    //     console.log({name, newValue, oldValue});
     // }
 
     /**

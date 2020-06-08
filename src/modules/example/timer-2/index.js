@@ -59,6 +59,7 @@ class ExampleTimer2 extends HTMLElement {
      */
     set value(value) {
         this.setAttribute('value', value);
+        this.valueEl.innerHTML = value;
     }
 
     /**
@@ -98,17 +99,17 @@ class ExampleTimer2 extends HTMLElement {
      * @param {*} oldValue Старое значение.
      * @param {*} newValue Новое значение.
      */
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.valueEl.innerHTML = newValue;
-    }
+    // attributeChangedCallback(name, oldValue, newValue) {
+    //     console.log({name, newValue, oldValue});
+    // }
 
     /**
      * Получить массив атрибутов, за которыми нужно слдедить.
      * @return {string[]} Массив атрибутов, за которыми нужно слдедить.
      */
-    static get observedAttributes() {
-        return ['value'];
-    }
+    // static get observedAttributes() {
+    //     return [];
+    // }
 
     /**
      * Срабатывает, когда пользовательский элемент перемещен в новый документ.
