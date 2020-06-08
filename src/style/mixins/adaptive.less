@@ -1,0 +1,29 @@
+@size-xs: 0;
+@size-sm: 640px;
+@size-md: 960px;
+@size-lg: 1280px;
+@size-xl: 1600px;
+
+// Extra small screen / phone
+@xs-min: ~'(width >= @{size-xs})';
+@xs-max: ~'(width < @{size-sm})';
+@xs: @xs-min and @xs-max;
+
+// Small screen / tablet
+@sm-min: ~'(width >= @{size-sm})';
+@sm-max: ~'(width < @{size-md})';
+@sm: @sm-min and @sm-max;
+
+// Medium screen / desktop
+@md-min: ~'(width >= @{size-md})';
+@md-max: ~'(width < @{size-lg})';
+@md: @md-min and @md-max;
+
+// Large screen / wide desktop
+@lg-min: ~'(width >= @{size-lg})';
+@lg-max: ~'(width < @{size-xl})';
+@lg: @lg-min and @lg-max;
+
+// Extra large screen / wide desktop
+@xl-min: ~'(width >= @{size-xl})';
+@xl: @xl-min;

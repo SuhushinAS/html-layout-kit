@@ -1,4 +1,4 @@
-@import (reference) 'adaptive';
+@import (reference) 'mixins';
 
 .d_b {
     display: block;
@@ -59,8 +59,7 @@
 }
 
 .make-display(@class) {
-    @query: ~'@{class}-min';
-    .make-display-media(@class, @@query);
+    .make-display-media(@class, @@class);
 }
 
 .make-display(xs);
