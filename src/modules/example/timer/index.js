@@ -49,11 +49,6 @@ class ExampleTimer extends HTMLElement {
     }
 
     /**
-     * Срабатывает, когда пользовательский элемент впервые добавляется в DOM.
-     */
-    // connectedCallback() {}
-
-    /**
      * Получить значение.
      * @return {number} Значение.
      */
@@ -117,11 +112,6 @@ class ExampleTimer extends HTMLElement {
     static get observedAttributes() {
         return ['value'];
     }
-
-    /**
-     * Срабатывает, когда пользовательский элемент перемещен в новый документ.
-     */
-    // adoptedCallback() {}
 
     /**
      * Срабатывает, когда пользовательский элемент удаляется из DOM.

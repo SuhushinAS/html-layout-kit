@@ -4,19 +4,19 @@ import {attachEvent} from 'helpers/event';
 import template from './index.hbs';
 
 /**
- * Class ExampleTimer2.
+ * Class ExampleTimerLite.
  * Класс для примера.
  */
-class ExampleTimer2 extends HTMLElement {
+class ExampleTimerLite extends HTMLElement {
     /**
      * Конструктор класса для примера.
      */
     constructor() {
         super();
         this.innerHTML = template({value: this.value});
-        this.playEl = this.querySelector('.j-example-timer-2-play');
-        this.stopEl = this.querySelector('.j-example-timer-2-stop');
-        this.valueEl = this.querySelector('.j-example-timer-2-value');
+        this.playEl = this.querySelector('.j-example-timer-lite-play');
+        this.stopEl = this.querySelector('.j-example-timer-lite-stop');
+        this.valueEl = this.querySelector('.j-example-timer-lite-value');
 
         attachEvent(this.playEl, 'click', this.onPlay);
         attachEvent(this.stopEl, 'click', this.onStop);
@@ -39,11 +39,6 @@ class ExampleTimer2 extends HTMLElement {
     onStop = () => {
         this.timerStop();
     };
-
-    /**
-     * Срабатывает, когда пользовательский элемент впервые добавляется в DOM.
-     */
-    // connectedCallback() {}
 
     /**
      * Получить значение.
@@ -94,29 +89,6 @@ class ExampleTimer2 extends HTMLElement {
     };
 
     /**
-     * Срабатывает, когда пользовательскому элементу добавляют, удаляют или изменяют атрибут.
-     * @param {*} name Название атрибута.
-     * @param {*} oldValue Старое значение.
-     * @param {*} newValue Новое значение.
-     */
-    // attributeChangedCallback(name, oldValue, newValue) {
-    //     console.log({name, newValue, oldValue});
-    // }
-
-    /**
-     * Получить массив атрибутов, за которыми нужно слдедить.
-     * @return {string[]} Массив атрибутов, за которыми нужно слдедить.
-     */
-    // static get observedAttributes() {
-    //     return [];
-    // }
-
-    /**
-     * Срабатывает, когда пользовательский элемент перемещен в новый документ.
-     */
-    // adoptedCallback() {}
-
-    /**
      * Срабатывает, когда пользовательский элемент удаляется из DOM.
      */
     disconnectedCallback() {
@@ -126,4 +98,4 @@ class ExampleTimer2 extends HTMLElement {
     }
 }
 
-customElements.define('app-example-timer-2', ExampleTimer2);
+customElements.define('app-example-timer-lite', ExampleTimerLite);
