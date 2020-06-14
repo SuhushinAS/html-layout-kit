@@ -1,5 +1,6 @@
 import './style.less';
 import {attachEvent} from 'helpers/event';
+import {Timer} from 'helpers/timer';
 import template from './index.hbs';
 
 /**
@@ -12,9 +13,21 @@ class ExampleTimer extends HTMLElement {
      */
     constructor() {
         super();
-        this.innerHTML = template({value: this.value});
+        const value = Number(this.getAttribute('value')) || 0;
+
+        this.innerHTML = template({value});
+        this.timer = new Timer(value, this.handleTimer);
+
         attachEvent(this, 'click', this.onClick);
     }
+
+    /**
+     * Обработать таймер.
+     * @param {*} value Значение.
+     */
+    handleTimer = (value) => {
+        this.setAttribute('value', value);
+    };
 
     /**
      * Обработать клик.
@@ -22,86 +35,21 @@ class ExampleTimer extends HTMLElement {
      */
     onClick = (e) => {
         if (e.target.classList.contains('j-example-timer-play')) {
-            this.onPlay();
+            this.timer.toggle();
         }
         if (e.target.classList.contains('j-example-timer-stop')) {
-            this.onStop();
+            this.timer.stop();
         }
-    };
-
-    /**
-     * Обработать запуск.
-     */
-    onPlay() {
-        if (this.timer) {
-            this.timerPause();
-        } else {
-            this.timerStart();
-        }
-    }
-
-    /**
-     * Обработать остановку.
-     */
-    onStop() {
-        this.timerStop();
-    }
-
-    /**
-     * Получить значение.
-     * @return {number} Значение.
-     */
-    get value() {
-        return Number(this.getAttribute('value')) || 0;
-    }
-
-    /**
-     * Задачть значение.
-     * @param value Значение.
-     */
-    set value(value) {
-        this.setAttribute('value', value);
-    }
-
-    /**
-     * Запустить таймер.
-     */
-    timerStart() {
-        this.timer = setTimeout(this.tick, 1000);
-    }
-
-    /**
-     * Остановить таймер.
-     */
-    timerPause() {
-        clearTimeout(this.timer);
-        delete this.timer;
-    }
-
-    /**
-     * Сбросить таймер.
-     */
-    timerStop() {
-        this.timerPause();
-        this.value = 0;
-    }
-
-    /**
-     * Тик таймера.
-     */
-    tick = () => {
-        this.value++;
-        this.timer = setTimeout(this.tick, 1000);
     };
 
     /**
      * Срабатывает, когда пользовательскому элементу добавляют, удаляют или изменяют атрибут.
      * @param {*} name Название атрибута.
      * @param {*} oldValue Старое значение.
-     * @param {*} newValue Новое значение.
+     * @param {*} value Новое значение.
      */
-    attributeChangedCallback(name, oldValue, newValue) {
-        this.innerHTML = template({value: newValue});
+    attributeChangedCallback(name, oldValue, value) {
+        this.innerHTML = template({value});
     }
 
     /**
@@ -117,7 +65,7 @@ class ExampleTimer extends HTMLElement {
      */
     disconnectedCallback() {
         this.removeEventListener('click', this.onClick);
-        this.timerStop();
+        this.timer.stop();
     }
 }
 
