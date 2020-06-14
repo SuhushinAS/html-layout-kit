@@ -4,10 +4,10 @@ import {Timer} from 'helpers/timer';
 import template from './index.hbs';
 
 /**
- * Class ExampleTimer.
+ * Class TimerCustom.
  * Класс для примера.
  */
-class ExampleTimer extends HTMLElement {
+class TimerCustom extends HTMLElement {
     /**
      * Конструктор класса для примера.
      */
@@ -16,7 +16,7 @@ class ExampleTimer extends HTMLElement {
         const value = Number(this.getAttribute('value')) || 0;
 
         this.innerHTML = template({value});
-        this.timer = new Timer(value, this.handleTimer);
+        this.timer = new Timer(value, this.onTimer);
 
         attachEvent(this, 'click', this.onClick);
     }
@@ -25,7 +25,7 @@ class ExampleTimer extends HTMLElement {
      * Обработать таймер.
      * @param {*} value Значение.
      */
-    handleTimer = (value) => {
+    onTimer = (value) => {
         this.setAttribute('value', value);
     };
 
@@ -34,10 +34,10 @@ class ExampleTimer extends HTMLElement {
      * @param {*} e Событие.
      */
     onClick = (e) => {
-        if (e.target.classList.contains('j-example-timer-play')) {
+        if (e.target.classList.contains('j-timer-custom-play')) {
             this.timer.toggle();
         }
-        if (e.target.classList.contains('j-example-timer-stop')) {
+        if (e.target.classList.contains('j-timer-custom-stop')) {
             this.timer.stop();
         }
     };
@@ -69,4 +69,4 @@ class ExampleTimer extends HTMLElement {
     }
 }
 
-customElements.define('app-example-timer', ExampleTimer);
+customElements.define('app-timer-custom', TimerCustom);

@@ -4,10 +4,10 @@ import {Timer} from 'helpers/timer';
 import template from './index.hbs';
 
 /**
- * Class ExampleTimerLite.
+ * Class TimerLite.
  * Класс для примера.
  */
-class ExampleTimerLite extends HTMLElement {
+class TimerLite extends HTMLElement {
     /**
      * Конструктор класса для примера.
      */
@@ -16,10 +16,10 @@ class ExampleTimerLite extends HTMLElement {
         const value = Number(this.getAttribute('value')) || 0;
 
         this.innerHTML = template({value});
-        this.playEl = this.querySelector('.j-example-timer-lite-play');
-        this.stopEl = this.querySelector('.j-example-timer-lite-stop');
-        this.valueEl = this.querySelector('.j-example-timer-lite-value');
-        this.timer = new Timer(value, this.handleTimer);
+        this.playEl = this.querySelector('.j-timer-lite-play');
+        this.stopEl = this.querySelector('.j-timer-lite-stop');
+        this.valueEl = this.querySelector('.j-timer-lite-value');
+        this.timer = new Timer(value, this.onTimer);
 
         attachEvent(this.playEl, 'click', this.onPlay);
         attachEvent(this.stopEl, 'click', this.onStop);
@@ -29,7 +29,7 @@ class ExampleTimerLite extends HTMLElement {
      * Обработать таймер.
      * @param {*} value Значение.
      */
-    handleTimer = (value) => {
+    onTimer = (value) => {
         this.setAttribute('value', value);
         this.valueEl.innerHTML = value;
     };
@@ -58,4 +58,4 @@ class ExampleTimerLite extends HTMLElement {
     }
 }
 
-customElements.define('app-example-timer-lite', ExampleTimerLite);
+customElements.define('app-timer-lite', TimerLite);

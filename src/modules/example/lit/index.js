@@ -14,13 +14,15 @@ class ExampleLit extends LitElement {
         return {
             value: {
                 /**
-                 * Если свойство hasChanged(value, oldValue) возвращает false, элемент не обновляется.
+                 * Если свойство hasChanged возвращает false, элемент не обновляется.
                  * Иначе планируется обновление путем вызова requestUpdate().
+                 * @param {*} value Значение.
+                 * @param oldValue Старое значение.
                  * @return {boolean} Нужно ли обновиться.
                  */
-                hasChanged() {
-                    return true;
-                },
+                // hasChanged(value, oldValue) {
+                //     return true;
+                // },
                 type: String,
             },
         };
