@@ -1,4 +1,3 @@
-// @flow
 import querystring from 'querystring';
 
 export type TQuery = {
