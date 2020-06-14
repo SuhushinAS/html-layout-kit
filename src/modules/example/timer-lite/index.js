@@ -1,4 +1,3 @@
-// @flow
 import './style.less';
 import {attachEvent} from 'helpers/event';
 import template from './index.hbs';

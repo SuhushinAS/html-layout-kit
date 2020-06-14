@@ -1,4 +1,3 @@
-// @flow
 import './style.less';
 import template from './index.hbs';
 
