@@ -5,4 +5,5 @@ import 'modules/example/default';
 import 'modules/example/custom';
 import 'modules/example/timer';
 import 'modules/example/timer-lite';
+import 'modules/example/lit';
 import './style.less';
