@@ -19,6 +19,24 @@
             <app-example-lit value="4"></app-example-lit>
         </div>
         <div class="page__block">
+            <app-example-slot>
+                {{> modules/common/svg-icon/index src="images/image.svg" }}
+            </app-example-slot>
+        </div>
+        <div class="page__block">
+            <app-example-slot-name>
+                <h1 slot="second">
+                    First
+                </h1>
+                <h2 slot="third">
+                    Second
+                </h2>
+                <h3 slot="first">
+                    Third
+                </h3>
+            </app-example-slot-name>
+        </div>
+        <div class="page__block">
             <app-timer-custom value="4"></app-timer-custom>
         </div>
         <div class="page__block">
