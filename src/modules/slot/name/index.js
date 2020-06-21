@@ -1,11 +1,10 @@
-import './style.less';
 import template from './index.hbs';
 
 /**
- * Class ExampleSlotName.
+ * Class SlotName.
  * Класс для примера.
  */
-class ExampleSlotName extends HTMLElement {
+class SlotName extends HTMLElement {
     /**
      * Конструктор класса для примера.
      */
@@ -16,4 +15,4 @@ class ExampleSlotName extends HTMLElement {
     }
 }
 
-customElements.define('app-example-slot-name', ExampleSlotName);
+customElements.define('app-slot-name', SlotName);
