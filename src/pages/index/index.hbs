@@ -1,52 +1,23 @@
 {{#*inline "layout-header"}}{{> modules/layout/header/index }}{{/inline}}
 {{#*inline "layout-footer"}}{{> modules/layout/footer/index }}{{/inline}}
 {{#> modules/layout/layout/index }}
-    <div class="page page-index">
+    <div class="page page_gray page-index">
         <h1>HTML Layout Kit</h1>
-        {{#*inline "example-default-block"}}
-            <h2>Hello</h2>
-        {{/inline}}
-        <div class="page__block">
-            {{> modules/example/default/index logo="images/image.svg" }}
-        </div>
-        <div class="page__block">
-            {{> modules/common/svg-icon/index src="images/image.svg" }}
-        </div>
-        <div class="page__block">
-            <app-example-custom value="4"></app-example-custom>
-        </div>
-        <div class="page__block">
-            <app-example-lit value="4"></app-example-lit>
-        </div>
-        <div class="page__block">
-            <app-slot-default>
-                {{> modules/common/svg-icon/index src="images/image.svg" }}
-            </app-slot-default>
-        </div>
-        <div class="page__block">
-            <app-slot-name>
-                <h1 slot="second">
-                    First
-                </h1>
-                <h2 slot="third">
-                    Second
-                </h2>
-                <h3 slot="first">
-                    Third
-                </h3>
-            </app-slot-name>
-        </div>
-        <div class="page__block">
-            <app-timer-custom value="4"></app-timer-custom>
-        </div>
-        <div class="page__block">
-            <app-timer-lite value="4"></app-timer-lite>
-        </div>
-        <div class="page__block">
-            <app-timer-lit value="4"></app-timer-lit>
-        </div>
-        <div class="page__block">
-            <a href="/user">User</a>
+        <div class="page__block page__block_offset">
+            <ul>
+                <li>
+                    <a href="/example">Example</a>
+                </li>
+                <li>
+                    <a href="/custom">Custom</a>
+                </li>
+                <li>
+                    <a href="/slot">Slot</a>
+                </li>
+                <li>
+                    <a href="/user">User</a>
+                </li>
+            </ul>
         </div>
     </div>
 {{/ modules/layout/layout/index }}

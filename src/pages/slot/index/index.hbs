@@ -1,0 +1,31 @@
+{{#*inline "layout-header"}}{{> modules/layout/header/index }}{{/inline}}
+{{#*inline "layout-footer"}}{{> modules/layout/footer/index }}{{/inline}}
+{{#> modules/layout/layout/index }}
+    <div class="page page_gray page-slot">
+        <h1>Slot</h1>
+        <div class="page__block page__block_offset">
+            <h2>Default</h2>
+            <app-slot-default>
+                {{> modules/common/svg-icon/index src="images/image.svg" }}
+            </app-slot-default>
+        </div>
+        <div class="page__block page__block_offset">
+            <h2>Named</h2>
+            <app-slot-name>
+                <h1 slot="second">
+                    First
+                </h1>
+                <h2 slot="third">
+                    Second
+                </h2>
+                <h3 slot="first">
+                    Third
+                </h3>
+            </app-slot-name>
+        </div>
+        <div class="page__block page__block_offset">
+            <h2>Lit-element</h2>
+            soon...
+        </div>
+    </div>
+{{/ modules/layout/layout/index }}
