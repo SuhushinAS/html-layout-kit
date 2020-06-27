@@ -79,6 +79,15 @@ class TimerLit extends LitElement {
     firstUpdated() {
         this.timer = new Timer(this.value, this.onTimer);
     }
+
+    /**
+     * Вызывается всякий раз, когда DOM элемента обновляется и отображается.
+     * Реализация для выполнения задач после обновления через API DOM, например, фокусировка на элементе.
+     // * @param {*} changedProperties Map, содержащий ключи измененных свойств.
+     */
+    updated() {
+        this.timer.value = this.value;
+    }
 }
 
 customElements.define('app-timer-lit', TimerLit);

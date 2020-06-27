@@ -31,7 +31,6 @@ class TimerLite extends HTMLElement {
      */
     onTimer = (value) => {
         this.setAttribute('value', value);
-        this.valueEl.innerHTML = value;
     };
 
     /**
@@ -47,6 +46,25 @@ class TimerLite extends HTMLElement {
     onStop = () => {
         this.timer.stop();
     };
+
+    /**
+     * Срабатывает, когда пользовательскому элементу добавляют, удаляют или изменяют атрибут.
+     * @param {*} name Название атрибута.
+     * @param {*} oldValue Старое значение.
+     * @param {*} value Новое значение.
+     */
+    attributeChangedCallback(name, oldValue, value) {
+        this.valueEl.innerHTML = value;
+        this.timer.value = value;
+    }
+
+    /**
+     * Получить массив атрибутов, за которыми нужно слдедить.
+     * @return {string[]} Массив атрибутов, за которыми нужно слдедить.
+     */
+    static get observedAttributes() {
+        return ['value'];
+    }
 
     /**
      * Срабатывает, когда пользовательский элемент удаляется из DOM.

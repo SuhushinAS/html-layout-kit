@@ -1,16 +1,12 @@
 import querystring from 'querystring';
 
-export type TQuery = {
-    [string]: mixed,
-};
-
 /**
  * Получить адрес.
  * @param {string} url Адрес.
  * @param {*} query Параметры.
  * @returns {string} Адрес.
  */
-export function getHref(url: string, query: TQuery): string {
+export function getHref(url, query) {
     const hrefParts = getHrefParts(url);
     const hrefList = [hrefParts.path];
     const search = getSearch(hrefParts.search, query);
@@ -27,7 +23,7 @@ export function getHref(url: string, query: TQuery): string {
  * @param {string} href Адрес.
  * @returns {{path: string, search: string}} Части адреса.
  */
-export function getHrefParts(href: string) {
+export function getHrefParts(href) {
     const [path, ...searchList] = href.split('?');
     return {
         path,
@@ -41,7 +37,7 @@ export function getHrefParts(href: string) {
  * @param {*} query Параметры в объекте.
  * @returns {string} Параметры в строке.
  */
-export function getSearch(search: string, query: TQuery = {}): string {
+export function getSearch(search, query = {}) {
     return querystring.stringify(getQuery(search, query));
 }
 
@@ -51,7 +47,7 @@ export function getSearch(search: string, query: TQuery = {}): string {
  * @param {*} query Параметры в объекте.
  * @returns {*} Параметры в объекте.
  */
-export function getQuery(search: string, query: TQuery = {}): TQuery {
+export function getQuery(search, query = {}) {
     return getQueryClean({...querystring.parse(search), ...query});
 }
 
@@ -60,7 +56,7 @@ export function getQuery(search: string, query: TQuery = {}): TQuery {
  * @param {*} query Параметры в объекте.
  * @returns {*} Параметры в объекте.
  */
-export function getQueryClean(query: TQuery) {
+export function getQueryClean(query) {
     return Object.keys(query).reduce((prev, key) => {
         if ('undefined' !== typeof query[key]) {
             return {...prev, [key]: query[key]};

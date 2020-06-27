@@ -14,7 +14,7 @@ export class Timer {
         this.onChange = onChange;
     }
 
-    interval = 1000;
+    interval;
     onChange;
     _timer;
     _value;
@@ -32,10 +32,13 @@ export class Timer {
      * @param {*} value Значение.
      */
     set value(value) {
-        this._value = value;
+        const intValue = Number(value);
+        if (intValue !== this._value) {
+            this._value = intValue;
 
-        if ('function' === typeof this.onChange) {
-            this.onChange(value);
+            if ('function' === typeof this.onChange) {
+                this.onChange(intValue);
+            }
         }
     }
 
@@ -51,7 +54,7 @@ export class Timer {
      * Запустить таймер.
      */
     start() {
-        this._timer = setTimeout(this.tick, 1000);
+        this._timer = setTimeout(this.tick, this.interval);
     }
 
     /**

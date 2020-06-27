@@ -12,20 +12,30 @@
         <div class="page__block page__block_offset">
             <h2>Named</h2>
             <app-slot-name>
-                <h1 slot="second">
-                    First
-                </h1>
-                <h2 slot="third">
-                    Second
-                </h2>
-                <h3 slot="first">
-                    Third
-                </h3>
+                <h1 slot="second">First</h1>
+                <h2 slot="third">Second</h2>
+                <h3 slot="first">Third</h3>
             </app-slot-name>
         </div>
         <div class="page__block page__block_offset">
             <h2>Lit-element</h2>
-            soon...
+            <app-slot-lit>
+                <div>Hello</div>
+            </app-slot-lit>
+        </div>
+        <div class="page__block page__block_offset">
+            <h2>Lit-element named</h2>
+            <app-slot-lit-named>
+                <template content-for="second">
+                    <h1>First</h1>
+                </template>
+                <template content-for="third">
+                    <h2>Second</h2>
+                </template>
+                <template content-for="first">
+                    <h3>Third</h3>
+                </template>
+            </app-slot-lit-named>
         </div>
     </div>
 {{/ modules/layout/layout/index }}

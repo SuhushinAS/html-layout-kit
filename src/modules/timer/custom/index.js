@@ -50,6 +50,7 @@ class TimerCustom extends HTMLElement {
      */
     attributeChangedCallback(name, oldValue, value) {
         this.innerHTML = template({value});
+        this.timer.value = value;
     }
 
     /**
