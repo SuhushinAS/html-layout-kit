@@ -7,8 +7,8 @@
 }
 
 .font-fluid(@f-min, @l-min, @f-max, @l-max) {
-    @screen-min: @size-sm;
-    @screen-max: @size-lg;
+    @screen-min: @size-sm-min;
+    @screen-max: @size-lg-min;
 
     .make-font-fluid(@f-min, @l-min, @screen-min, @f-max, @l-max, @screen-max);
 
