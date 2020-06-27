@@ -3,10 +3,16 @@
 .page {
     flex-grow: 1;
 
+    &_gray {
+        background-color: @c-gray-9;
+    }
+
     &__block {
         background-color: @c-white-1;
         margin-top: 16px;
-        padding-bottom: 16px;
-        padding-top: 16px;
+
+        &_offset {
+            padding: 16px;
+        }
     }
 }
