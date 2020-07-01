@@ -117,7 +117,7 @@ const webpackConfig = {
         tls: 'empty',
     },
     optimization: {
-        minimize: isProd,
+        minimize: false,
         minimizer: [
             new TerserPlugin({
                 extractComments: false,
