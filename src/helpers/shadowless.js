@@ -44,14 +44,14 @@ export const shadowless = (Base) =>
             const childNodes = [];
 
             Array.from(this.childNodes).forEach((child) => {
-                if (!(child instanceof HTMLTemplateElement)) {
-                    childNodes.push(child);
-                } else {
+                if (child instanceof HTMLTemplateElement) {
                     const slot = this.getSlotForTemplate(child);
 
                     if (!this.templateMap.has(slot)) {
                         this.templateMap.set(slot, child);
                     }
+                } else {
+                    childNodes.push(child);
                 }
             });
 
