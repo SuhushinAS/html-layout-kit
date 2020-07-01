@@ -52,9 +52,9 @@ class TimerLit extends LitElement {
      * @return {*} Представление.
      */
     render() {
-        return html`<button class="timer-custom__button" @click=${this.onPlay}>&#9199;</button>
-            <button class="timer-custom__button" @click=${this.onStop}>&#9209;</button>
-            <div class="timer-custom__value">${this.value}</div> `;
+        return html`<button class="timer-lit__button" @click=${this.onPlay}>&#9199;</button>
+            <button class="timer-lit__button" @click=${this.onStop}>&#9209;</button>
+            <div class="timer-lit__value">${this.value}</div> `;
     }
 
     /**
