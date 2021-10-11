@@ -25,7 +25,7 @@ module.exports = (options) => {
         output: {
             clean: true,
             filename: '[name].min.js',
-            library: ['reactStarterKit'],
+            library: ['htmlLayoutKit'],
             path: options.dist,
             publicPath: '/',
         },
