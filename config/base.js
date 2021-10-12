@@ -2,11 +2,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = (options) => {
     const isProd = 'production' === options.mode;
-    const stats = {
-        colors: true,
-        errorDetails: true,
-        reasons: isProd,
-    };
 
     return {
         bail: isProd,
@@ -41,7 +36,11 @@ module.exports = (options) => {
             },
             modules: ['src', 'node_modules'],
         },
-        stats,
+        stats: {
+            colors: true,
+            errorDetails: true,
+            reasons: isProd,
+        },
         target: isProd ? 'browserslist' : 'web',
         watchOptions: {aggregateTimeout: 300},
     };
