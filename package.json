@@ -81,7 +81,7 @@
         "serve": "cross-env NODE_ENV=production webpack serve --mode=production",
         "start": "cross-env NODE_ENV=development webpack serve --mode=development",
         "stylelint": "stylelint ./**/*.{css,less} --fix",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Warning: no test specified\" && exit 0"
     },
     "version": "0.0.1"
 }
