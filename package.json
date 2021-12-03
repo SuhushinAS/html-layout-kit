@@ -28,10 +28,10 @@
         "handlebars-loader": "^1.7.1",
         "html-loader": "^1.3.2",
         "html-webpack-plugin": "^5.5.0",
-        "husky": "^6.0.0",
+        "husky": "^7.0.0",
         "less": "^3.13.1",
         "less-loader": "^10.2.0",
-        "lint-staged": "^11.2.3",
+        "lint-staged": "^12.1.2",
         "mini-css-extract-plugin": "^2.4.5",
         "postcss": "^8.4.4",
         "postcss-flexbugs-fixes": "^5.0.2",
@@ -50,6 +50,11 @@
         "node": ">= 14.0.0",
         "npm": ">= 6.0.0"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "keywords": [
         "HtmlLayoutKit"
     ],
@@ -58,7 +63,7 @@
         "!(*min).{css,less}": [
             "stylelint --fix"
         ],
-        "!(*min).{js,jsx}": [
+        "!(*min).{js,jsx,ts,tsx}": [
             "eslint --fix"
         ]
     },
@@ -72,9 +77,11 @@
         "build": "cross-env NODE_ENV=production webpack --progress --mode=production",
         "eslint": "eslint --ext .js,.jsx --fix ./src",
         "lint": "npm run eslint && npm run stylelint",
+        "prepare": "husky install",
         "serve": "cross-env NODE_ENV=production webpack serve --mode=production",
         "start": "cross-env NODE_ENV=development webpack serve --mode=development",
-        "stylelint": "stylelint ./**/*.{css,less} --fix"
+        "stylelint": "stylelint ./**/*.{css,less} --fix",
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "version": "0.0.1"
 }
