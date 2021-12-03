@@ -12,9 +12,12 @@ const customInterpolateName = (url) => url.toLowerCase();
  * @param {boolean} isProd Продакшен.
  * @return {*} Плагины.
  */
-const getPlugins = (isProd) => (isProd ? [new webpack.LoaderOptionsPlugin({debug: false, minimize: true, options: {customInterpolateName}})] : []);
+const getPlugins = ({mode}) =>
+    'production' === mode
+        ? [new webpack.LoaderOptionsPlugin({debug: false, minimize: true, options: {customInterpolateName}})]
+        : [new webpack.HotModuleReplacementPlugin()];
 
-module.exports = ({mode}) => ({
+module.exports = (config) => ({
     module: {
         rules: [
             {
@@ -25,8 +28,8 @@ module.exports = ({mode}) => ({
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(mode)}}),
+        new webpack.DefinePlugin({'process.env': {NODE_ENV: JSON.stringify(config.mode)}}),
         new webpack.IgnorePlugin({contextRegExp: /moment$/u, resourceRegExp: /^\.\/locale$/u}),
-        ...getPlugins('production' === mode),
+        ...getPlugins(config),
     ],
 });

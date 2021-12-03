@@ -6,15 +6,7 @@ const path = require('path');
  * @param {string} rootPath Путь.
  * @return {string[]|*[]} список папок.
  */
-function getPageList(rootPath) {
-    const stat = fs.statSync(rootPath);
-
-    if (!stat.isDirectory()) {
-        return [];
-    }
-
-    return fs.readdirSync(rootPath);
-}
+const getPageList = (rootPath) => (fs.statSync(rootPath).isDirectory() ? fs.readdirSync(rootPath) : []);
 
 /**
  * Получить страницу.
@@ -22,15 +14,7 @@ function getPageList(rootPath) {
  * @param {string} folder Путь.
  * @return {string[]} Страница.
  */
-function getPage(root, folder) {
-    const pageIndex = path.join(root, folder, 'index.js');
-
-    if (fs.existsSync(pageIndex)) {
-        return [folder.split('\\').join('/')];
-    }
-
-    return [];
-}
+const getPage = (root, folder) => (fs.existsSync(path.join(root, folder, 'index.js')) ? [folder.split('\\').join('/')] : []);
 
 /**
  * Получить список папок.
@@ -38,14 +22,11 @@ function getPage(root, folder) {
  * @param {string} folder Папка.
  * @returns {*} список папок.
  */
-function pages(root, folder = '') {
-    const pageList = getPageList(path.join(root, folder));
-
-    return pageList.reduce((acc, item) => {
+const pages = (root, folder = '') =>
+    getPageList(path.join(root, folder)).reduce((acc, item) => {
         const pageFolder = path.join(folder, item);
 
         return [...acc, ...getPage(root, pageFolder), ...pages(root, pageFolder)];
     }, []);
-}
 
 module.exports = pages;
