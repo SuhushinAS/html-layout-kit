@@ -7,15 +7,15 @@ import querystring from 'querystring';
  * @returns {string} Адрес.
  */
 export function getHref(url, query) {
-    const hrefParts = getHrefParts(url);
-    const hrefList = [hrefParts.path];
-    const search = getSearch(hrefParts.search, query);
+  const hrefParts = getHrefParts(url);
+  const hrefList = [hrefParts.path];
+  const search = getSearch(hrefParts.search, query);
 
-    if (search) {
-        hrefList.push(search);
-    }
+  if (search) {
+    hrefList.push(search);
+  }
 
-    return hrefList.join('?');
+  return hrefList.join('?');
 }
 
 /**
@@ -24,11 +24,11 @@ export function getHref(url, query) {
  * @returns {{path: string, search: string}} Части адреса.
  */
 export function getHrefParts(href) {
-    const [path, ...searchList] = href.split('?');
-    return {
-        path,
-        search: searchList.join('?'),
-    };
+  const [path, ...searchList] = href.split('?');
+  return {
+    path,
+    search: searchList.join('?'),
+  };
 }
 
 /**
@@ -38,7 +38,7 @@ export function getHrefParts(href) {
  * @returns {string} Параметры в строке.
  */
 export function getSearch(search, query = {}) {
-    return querystring.stringify(getQuery(search, query));
+  return querystring.stringify(getQuery(search, query));
 }
 
 /**
@@ -48,7 +48,7 @@ export function getSearch(search, query = {}) {
  * @returns {*} Параметры в объекте.
  */
 export function getQuery(search, query = {}) {
-    return getQueryClean({...querystring.parse(search), ...query});
+  return getQueryClean({...querystring.parse(search), ...query});
 }
 
 /**
@@ -57,11 +57,11 @@ export function getQuery(search, query = {}) {
  * @returns {*} Параметры в объекте.
  */
 export function getQueryClean(query) {
-    return Object.keys(query).reduce((prev, key) => {
-        if ('undefined' !== typeof query[key]) {
-            return {...prev, [key]: query[key]};
-        }
+  return Object.keys(query).reduce((prev, key) => {
+    if ('undefined' !== typeof query[key]) {
+      return {...prev, [key]: query[key]};
+    }
 
-        return prev;
-    }, {});
+    return prev;
+  }, {});
 }

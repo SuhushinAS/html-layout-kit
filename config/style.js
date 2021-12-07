@@ -28,17 +28,17 @@ const getLessLoader = ({root}) => ({loader: 'less-loader', options: {lessOptions
 const getPlugins = ({mode}) => ('production' === mode ? [new MiniCssExtractPlugin({filename: '[name].min.css'})] : []);
 
 module.exports = (config) => ({
-    module: {
-        rules: [
-            {
-                test: /\.css$/u,
-                use: [getStyleLoader(config), getCssLoader(), 'postcss-loader'],
-            },
-            {
-                test: /\.less$/u,
-                use: [getStyleLoader(config), getCssLoader(), 'postcss-loader', getLessLoader(config)],
-            },
-        ],
-    },
-    plugins: getPlugins(config),
+  module: {
+    rules: [
+      {
+        test: /\.css$/u,
+        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader'],
+      },
+      {
+        test: /\.less$/u,
+        use: [getStyleLoader(config), getCssLoader(), 'postcss-loader', getLessLoader(config)],
+      },
+    ],
+  },
+  plugins: getPlugins(config),
 });

@@ -1,18 +1,18 @@
 @import (reference) 'mixins';
 
 .page {
-    flex-grow: 1;
+  flex-grow: 1;
 
-    &_gray {
-        background-color: @c-gray-9;
+  &_gray {
+    background-color: @c-gray-9;
+  }
+
+  &__block {
+    background-color: @c-white-1;
+    margin-top: 16px;
+
+    &_offset {
+      padding: 16px;
     }
-
-    &__block {
-        background-color: @c-white-1;
-        margin-top: 16px;
-
-        &_offset {
-            padding: 16px;
-        }
-    }
+  }
 }

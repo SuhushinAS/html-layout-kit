@@ -1,9 +1,9 @@
 {
-    "head": {
-        "description": "User",
-        "keywords": "User",
-        "title": "User",
-        "image": "image.svg",
-        "url": "http://html-layout-kit.ru"
-    }
+  "head": {
+    "description": "User",
+    "keywords": "User",
+    "title": "User",
+    "image": "image.svg",
+    "url": "http://html-layout-kit.ru"
+  }
 }

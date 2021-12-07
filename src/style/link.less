@@ -2,49 +2,49 @@
 @import (reference) 'font';
 
 .link {
-    color: @c-link-default;
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-    text-decoration: none;
+  color: @c-link-default;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
 
-    &:hover,
-    &:active {
-        color: @c-link-hover;
+  &:hover,
+  &:active {
+    color: @c-link-hover;
+  }
+
+  &_arrow {
+    .f_h4();
+
+    display: inline-block;
+    position: relative;
+
+    &::before {
+      border-bottom: 2px solid currentColor;
+      border-left: 2px solid currentColor;
+      content: '';
+      height: 5px;
+      position: absolute;
+      width: 5px;
     }
+  }
 
-    &_arrow {
-        .f_h4();
+  &_arrow_left {
+    padding-left: 20px;
 
-        display: inline-block;
-        position: relative;
-
-        &::before {
-            border-bottom: 2px solid currentColor;
-            border-left: 2px solid currentColor;
-            content: '';
-            height: 5px;
-            position: absolute;
-            width: 5px;
-        }
+    &::before {
+      left: 6px;
+      top: 5px;
+      transform: rotate(45deg);
     }
+  }
 
-    &_arrow_left {
-        padding-left: 20px;
+  &_arrow_right {
+    padding-right: 20px;
 
-        &::before {
-            left: 6px;
-            top: 5px;
-            transform: rotate(45deg);
-        }
+    &::before {
+      right: 6px;
+      top: 6px;
+      transform: rotate(225deg);
     }
-
-    &_arrow_right {
-        padding-right: 20px;
-
-        &::before {
-            right: 6px;
-            top: 6px;
-            transform: rotate(225deg);
-        }
-    }
+  }
 }

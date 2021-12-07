@@ -5,18 +5,18 @@ import './style.less';
  * Класс для примера.
  */
 class ExampleDefault {
-    /**
-     * Конструктор класса для примера.
-     * @param {*} exampleDefault Элемент.
-     * @return {void}
-     */
-    constructor(exampleDefault) {
-        this.exampleDefault = exampleDefault;
-    }
+  /**
+   * Конструктор класса для примера.
+   * @param {*} exampleDefault Элемент.
+   * @return {void}
+   */
+  constructor(exampleDefault) {
+    this.exampleDefault = exampleDefault;
+  }
 }
 
 const exampleDefaultList = document.querySelectorAll('.j-example-default');
 
 exampleDefaultList.forEach((exampleDefault) => {
-    new ExampleDefault(exampleDefault);
+  new ExampleDefault(exampleDefault);
 });

@@ -14,7 +14,8 @@ const getPageList = (rootPath) => (fs.statSync(rootPath).isDirectory() ? fs.read
  * @param {string} folder Путь.
  * @return {string[]} Страница.
  */
-const getPage = (root, folder) => (fs.existsSync(path.join(root, folder, 'index.js')) ? [folder.split('\\').join('/')] : []);
+const getPage = (root, folder) =>
+  fs.existsSync(path.join(root, folder, 'index.js')) ? [folder.split('\\').join('/')] : [];
 
 /**
  * Получить список папок.
@@ -23,10 +24,10 @@ const getPage = (root, folder) => (fs.existsSync(path.join(root, folder, 'index.
  * @returns {*} список папок.
  */
 const pages = (root, folder = '') =>
-    getPageList(path.join(root, folder)).reduce((acc, item) => {
-        const pageFolder = path.join(folder, item);
+  getPageList(path.join(root, folder)).reduce((acc, item) => {
+    const pageFolder = path.join(folder, item);
 
-        return [...acc, ...getPage(root, pageFolder), ...pages(root, pageFolder)];
-    }, []);
+    return [...acc, ...getPage(root, pageFolder), ...pages(root, pageFolder)];
+  }, []);
 
 module.exports = pages;

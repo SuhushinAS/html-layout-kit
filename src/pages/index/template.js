@@ -3,6 +3,6 @@ import data from './data.json';
 import template from './index.hbs';
 
 export default html({
-    body: template(data),
-    head: data.head,
+  body: template(data),
+  head: data.head,
 });

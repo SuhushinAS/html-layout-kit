@@ -1,3 +1,17 @@
 {
-    "extends": "@suhushinas/eslint-config"
+  "extends": "@suhushinas/eslint-config",
+  "rules": {
+    "prettier/prettier": [
+      2,
+      {
+        "arrowParens": "always",
+        "bracketSpacing": false,
+        "jsxBracketSameLine": false,
+        "printWidth": 120,
+        "singleQuote": true,
+        "tabWidth": 2,
+        "trailingComma": "es5"
+      }
+    ]
+  }
 }

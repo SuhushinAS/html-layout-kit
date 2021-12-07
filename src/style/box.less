@@ -1,46 +1,46 @@
 @import (reference) 'mixins';
 
 .box {
-    margin-left: @grid-offset;
-    margin-right: @grid-offset;
+  margin-left: @grid-offset;
+  margin-right: @grid-offset;
 
-    &__row {
-        display: flex;
-        flex-wrap: wrap;
-        margin-left: -@grid-left;
-        margin-right: -@grid-right;
-    }
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -@grid-left;
+    margin-right: -@grid-right;
+  }
 
-    &__col {
+  &__col {
 
-        .col-make(xs, @xs-min);
+    .col-make(xs, @xs-min);
 
-        flex-basis: 0;
-        flex-grow: 1;
-        max-width: 100%;
-        padding-left: @grid-left;
-        padding-right: @grid-right;
-        transition: flex-basis @animation, max-width @animation;
-    }
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    padding-left: @grid-left;
+    padding-right: @grid-right;
+    transition: flex-basis @animation, max-width @animation;
+  }
 }
 
 .col-make(@class, @query) {
-    .col-loop(@grid-columns, @class, @query);
+  .col-loop(@grid-columns, @class, @query);
 
-    &_@{class}_auto {
-        @media @query {
-            flex-basis: auto;
-        }
+  &_@{class}_auto {
+    @media @query {
+      flex-basis: auto;
     }
+  }
 }
 
 .col-loop(@index, @class, @query) when (@index >= 0) {
-    .col-loop((@index - 1), @class, @query);
+  .col-loop((@index - 1), @class, @query);
 
-    &_@{class}_@{index} {
-        @media @query {
-            flex-basis: percentage((@index / @grid-columns));
-            max-width: percentage((@index / @grid-columns));
-        }
+  &_@{class}_@{index} {
+    @media @query {
+      flex-basis: percentage((@index / @grid-columns));
+      max-width: percentage((@index / @grid-columns));
     }
+  }
 }

@@ -1,9 +1,9 @@
 {
-    "head": {
-        "description": "Example",
-        "keywords": "Example",
-        "title": "Example",
-        "image": "image.svg",
-        "url": "http://html-layout-kit.ru"
-    }
+  "head": {
+    "description": "Example",
+    "keywords": "Example",
+    "title": "Example",
+    "image": "image.svg",
+    "url": "http://html-layout-kit.ru"
+  }
 }
