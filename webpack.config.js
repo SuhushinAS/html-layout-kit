@@ -17,37 +17,37 @@ const svg = require('./config/svg');
  * @returns {*} Конфигурация webpack.
  */
 function webpackConfig(env, argv) {
-    const {mode} = argv;
-    const root = __dirname;
-    const pageList = pages('src/pages', process.env.PAGE_ROOT || '');
-    const options = {
-        dist: path.join(root, 'www'),
-        mode,
-        pages: pageList,
-        public: path.join(root, 'public'),
-        root,
-        src: 'src',
-    };
-    const clean = 'production' === mode ? true : {keep: /\.svg$/u};
-    const result = {
-        output: {
-            clean,
-        },
-    };
+  const {mode} = argv;
+  const root = __dirname;
+  const pageList = pages('src/pages', process.env.PAGE_ROOT || '');
+  const options = {
+    dist: path.join(root, 'www'),
+    mode,
+    pages: pageList,
+    public: path.join(root, 'public'),
+    root,
+    src: 'src',
+  };
+  const clean = 'production' === mode ? true : {keep: /\.svg$/u};
+  const result = {
+    output: {
+      clean,
+    },
+  };
 
-    console.log(pageList);
+  console.log(pageList);
 
-    return merge(
-        asset(options),
-        base(options),
-        handlebars(options),
-        html(options),
-        optimization(options),
-        script(options),
-        style(options),
-        svg(options),
-        result
-    );
+  return merge(
+    asset(options),
+    base(options),
+    handlebars(options),
+    html(options),
+    optimization(options),
+    script(options),
+    style(options),
+    svg(options),
+    result
+  );
 }
 
 module.exports = webpackConfig;

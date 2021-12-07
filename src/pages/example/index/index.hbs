@@ -1,30 +1,24 @@
 {{#*inline "layout-header"}}{{> modules/layout/header/index }}{{/inline}}
 {{#*inline "layout-footer"}}{{> modules/layout/footer/index }}{{/inline}}
 {{#> modules/layout/layout/index }}
-    <div class="page page_gray page-example">
-        <h1>Example</h1>
-        <div class="page__block page__block_offset">
-            <h2>Inline Block</h2>
-            {{#*inline "example-default-second"}}
-                <h1>
-                    First
-                </h1>
-            {{/inline}}
-            {{#*inline "example-default-third"}}
-                <h2 slot="third">
-                    Second
-                </h2>
-            {{/inline}}
-            {{#*inline "example-default-first"}}
-                <h3 slot="first">
-                    Third
-                </h3>
-            {{/inline}}
-            {{> modules/example/default/index }}
-        </div>
-        <div class="page__block page__block_offset">
-            <h2>Svg Icon</h2>
-            {{> modules/common/svg-icon/index src="images/image.svg" }}
-        </div>
+  <div class="page page_gray page-example">
+    <h1>Example</h1>
+    <div class="page__block page__block_offset">
+      <h2>Inline Block</h2>
+      {{#*inline "example-default-second"}}
+        <h1>First</h1>
+      {{/inline}}
+      {{#*inline "example-default-third"}}
+        <h2 slot="third">Second</h2>
+      {{/inline}}
+      {{#*inline "example-default-first"}}
+        <h3 slot="first">Third</h3>
+      {{/inline}}
+      {{> modules/example/default/index }}
     </div>
+    <div class="page__block page__block_offset">
+      <h2>Svg Icon</h2>
+      {{> modules/common/svg-icon/index src="images/image.svg" }}
+    </div>
+  </div>
 {{/ modules/layout/layout/index }}

@@ -1,17 +1,17 @@
 {
-    "plugins": [
-        "@babel/transform-runtime",
-        "@babel/plugin-proposal-export-namespace-from",
-        "@babel/plugin-syntax-dynamic-import",
-        "@babel/plugin-proposal-class-properties"
-    ],
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "corejs": 3,
-                "useBuiltIns": "entry"
-            }
-        ]
+  "plugins": [
+    "@babel/transform-runtime",
+    "@babel/plugin-proposal-export-namespace-from",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "corejs": 3,
+        "useBuiltIns": "entry"
+      }
     ]
+  ]
 }
