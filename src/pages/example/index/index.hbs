@@ -1,6 +1,4 @@
-{{#*inline "layout-header"}}{{> modules/layout/header/index }}{{/inline}}
-{{#*inline "layout-footer"}}{{> modules/layout/footer/index }}{{/inline}}
-{{#> modules/layout/layout/index }}
+{{#> modules/layout/default/index }}
   <div class="page page_gray page-example">
     <h1>Example</h1>
     <div class="page__block page__block_offset">
@@ -20,5 +18,10 @@
       <h2>Svg Icon</h2>
       {{> modules/common/svg-icon/index src="images/image.svg" }}
     </div>
+    <div class="page__block page__block_offset">
+      {{#[helpers/with-image] head.image}}
+        <img src="{{src}}" alt="" height="16" width="16">
+      {{/[helpers/with-image]}}
+    </div>
   </div>
-{{/ modules/layout/layout/index }}
+{{/ modules/layout/default/index }}

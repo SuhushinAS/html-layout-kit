@@ -1,7 +1,5 @@
 <div class="header">
-  <a class="header__link" href="/">Home</a>
-  <a class="header__link" href="/example">Example</a>
-  <a class="header__link" href="/custom">Custom</a>
-  <a class="header__link" href="/slot">Slot</a>
-  <a class="header__link" href="/timer">Timer</a>
+  {{# each menu}}
+    <a class="header__link" href="{{this.link}}">{{this.title}}</a>
+  {{/each}}
 </div>

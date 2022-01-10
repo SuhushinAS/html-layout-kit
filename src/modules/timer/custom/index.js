@@ -1,5 +1,5 @@
-import {attachEvent} from 'helpers/event';
-import {Timer} from 'helpers/timer';
+import {Timer} from 'modules/timer/utils/timer';
+import {attachEvent} from 'utils/event';
 import template from './index.hbs';
 import './style.less';
 

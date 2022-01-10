@@ -1,5 +1,5 @@
 import {importScripts, requireAll} from 'entry';
-import {attachEvent} from 'helpers/event';
+import {attachEvent} from 'utils/event';
 
 attachEvent(document, 'DOMContentLoaded', importScripts);
 

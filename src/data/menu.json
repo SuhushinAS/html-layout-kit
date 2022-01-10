@@ -1,0 +1,26 @@
+[
+  {
+    "link": "/",
+    "title": "Home"
+  },
+  {
+    "link": "/example",
+    "title": "Example"
+  },
+  {
+    "link": "/custom",
+    "title": "Custom"
+  },
+  {
+    "link": "/slot",
+    "title": "Slot"
+  },
+  {
+    "link": "/timer",
+    "title": "Timer"
+  },
+  {
+    "link": "/user",
+    "title": "User"
+  }
+]

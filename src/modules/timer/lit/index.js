@@ -1,5 +1,5 @@
-import {Timer} from 'helpers/timer';
 import {html, LitElement} from 'lit-element';
+import {Timer} from 'modules/timer/utils/timer';
 import './style.less';
 
 /**

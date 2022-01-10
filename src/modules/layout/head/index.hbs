@@ -18,5 +18,8 @@
 {{/[helpers/with-image]}}
 <meta content="{{head.title}}" property="twitter:title">
 <meta content="{{head.url}}" property="twitter:url">
+{{#[helpers/with-image] head.image}}
+  <link href="{{src}}" rel="icon">
+{{/[helpers/with-image]}}
 
 <title>{{head.title}}</title>

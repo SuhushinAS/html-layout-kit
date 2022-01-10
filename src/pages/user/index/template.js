@@ -1,8 +1,8 @@
-import html from 'modules/layout/html/index.hbs';
+import menu from 'data/menu.json';
 import data from './data.json';
 import template from './index.hbs';
 
-export default html({
-  body: template(data),
-  head: data.head,
+export default template({
+  menu,
+  ...data,
 });
